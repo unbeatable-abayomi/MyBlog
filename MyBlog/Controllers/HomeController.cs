@@ -39,8 +39,8 @@ namespace MyBlog.Controllers
         [HttpGet("/Image/{image}")]
         public IActionResult Image(string image)
         {
-            var mime = image.FileName.Substring(image.FileName.LastIndexOf('.'));
-            return new FileStreamResult(_fileManager.ImageStream(image));
+            var mime = image.Substring(image.LastIndexOf('.') + 1);
+            return new FileStreamResult(_fileManager.ImageStream(image), $"Image/{mime}");
         }
         //public IActionResult Privacy()
         //{

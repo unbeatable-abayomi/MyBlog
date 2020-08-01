@@ -5,24 +5,43 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Home Page</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
-<img src="~/content/static/builee-com-yLdKV70P4kw-unsplash.jpg" width="470" />
-@foreach (var item in Model)
-{
-<ul>
-    <li>
-        <a asp-controller="Home" asp-action="Post" asp-route-Id="@item.Id"> @item.Title</a>
-    </li>
-    @*<li>
-        <a asp-controller="Home" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
-    </li>
-    <li>
-        <a asp-controller="Home" asp-action="Remove" asp-route-Id="@item.Id">Remove</a>
-    </li>*@
-</ul>
+</p>*@
+@*<img src="~/content/static/builee-com-yLdKV70P4kw-unsplash.jpg" width="470" />*@
 
-}
+<div class="main-img">
+     <span class="title">Amazing Blog Site</span>
+</div>
+<div class="containerMe">
+    @*@foreach (var item in Model)
+        {
+            <ul>
+                <li>
+                    <a asp-controller="Home" asp-action="Post" asp-route-Id="@item.Id"> @item.Title</a>
+                </li>
+                <li>
+                        <a asp-controller="Home" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="Remove" asp-route-Id="@item.Id">Remove</a>
+                    </li>
+            </ul>
+
+
+        }*@
+
+    @foreach (var item in Model)
+    {
+        var imagePath = $"/Image/{item.Image}";
+        <a class="post" asp-controller="Home" asp-action="Post" asp-route-Id="@item.Id"> @item.Title</a>
+     
+
+        <img src="@imagePath" width="150" />
+        <span >@item.Title</span>
+
+
+    }
+</div>

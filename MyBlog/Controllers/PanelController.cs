@@ -34,10 +34,10 @@ namespace MyBlog.Controllers
         //    var post = _repo.GetPost(id);
         //    return View(post);
         //}
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         public IActionResult Edit(int? id)

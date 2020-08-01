@@ -7,10 +7,32 @@
 
 
 
-<h4> This is a Post </h4>
+@*<h4> This is a Blog Site </h4>
 <hr />
 <h2>@Model.Title</h2>
-<h5>@Model.Body</h5>
+
+@if (!String.IsNullOrEmpty(Model.Image))
+{
+    var imagePath = $"/Image/{Model.Image}";
+
+    <img src="@imagePath" width="150" />
+}
+<h5>@Model.Body</h5>*@
+<div class="containerMe">
+    <div class="post no-shadow">
+        @if (!String.IsNullOrEmpty(Model.Image))
+        {
+            var imagePath = $"/Image/{Model.Image}";
+
+            <img src="@imagePath" width="150" />
+            <span class="title">@Model.Title</span>
+        }
+    </div>
+    <div class="post-body">
+        @Model.Body
+    </div>
+</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
