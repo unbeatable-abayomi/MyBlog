@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MyBlog.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<img src="~/content/static/builee-com-yLdKV70P4kw-unsplash.jpg" width="470" />
+@foreach (var item in Model)
+{
+<ul>
+    <li>
+        <a asp-controller="Home" asp-action="Post" asp-route-Id="@item.Id"> @item.Title</a>
+    </li>
+    @*<li>
+        <a asp-controller="Home" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
+    </li>
+    <li>
+        <a asp-controller="Home" asp-action="Remove" asp-route-Id="@item.Id">Remove</a>
+    </li>*@
+</ul>
+
+}

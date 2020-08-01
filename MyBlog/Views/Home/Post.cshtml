@@ -1,0 +1,17 @@
+﻿@model MyBlog.Models.Post
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h4> This is a Post </h4>
+<hr />
+<h2>@Model.Title</h2>
+<h5>@Model.Body</h5>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
