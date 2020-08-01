@@ -13,33 +13,47 @@ namespace MyBlog.Data.FileManger
     {
         private string _imagePath;
 
-        public FileManager(IConfiguration conifg)
+        public FileManager(IConfiguration config)
         {
-            _imagePath = conifg["Path:Images"];
+            _imagePath = config["Path:Images"];
         }
 
-        public  async Task<string> SaveImage(IFormFile image)
+        public FileStream ImageStream(string image)
         {
-            var save_path = Path.Combine(_imagePath);
-            if (!Directory.Exists(save_path))
+            return new FileStream(Path.Combine(_imagePath, image),FileMode.Open, FileAccess.Read);
+        }
+
+        public async Task<string> SaveImage(IFormFile image)
+        {
+            try
             {
-                Directory.CreateDirectory(save_path);
-            }
-          
 
 
-            //Internet Exploxer Error
-            //var fileName = Image.FileName 
-            var mime = image.FileName.Substring(image.FileName.LastIndexOf("."));
-            var fileName = $"img_{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}{mime}";
+                var save_path = Path.Combine(_imagePath);
+                if (!Directory.Exists(save_path))
+                {
+                    Directory.CreateDirectory(save_path);
+                }
 
 
-            using (var fileStream = new FileStream(Path.Combine(save_path, fileName), FileMode.Create))
+
+                //Internet Exploxer Error
+                //var fileName = Image.FileName 
+                var mime = image.FileName.Substring(image.FileName.LastIndexOf('.'));
+                var fileName = $"img_{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}{mime}";
+
+
+                using (var fileStream = new FileStream(Path.Combine(save_path, fileName), FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+
+                return fileName;
+            }catch(Exception e)
             {
-               await image.CopyToAsync(fileStream);
+                Console.WriteLine(e.Message);
+                return "Error";
             }
-
-            return fileName;
         }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MyBlog.Data;
 using MyBlog.Repository;
+using MyBlog.Data.FileManger;
 
 namespace MyBlog
 {
@@ -49,6 +50,7 @@ namespace MyBlog
             );
 
             services.AddTransient<IRepository, RepositoryClass>();
+            services.AddTransient<IFileManager, FileManager>();
 
             services.AddControllersWithViews();
           

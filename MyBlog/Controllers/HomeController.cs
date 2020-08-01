@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyBlog.Data.FileManger;
 using MyBlog.Models;
 using MyBlog.Repository;
 
@@ -14,10 +15,13 @@ namespace MyBlog.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository _repo;
-        public HomeController(ILogger<HomeController> logger, IRepository cxt)
+        private readonly IFileManager _fileManager;
+
+        public HomeController(ILogger<HomeController> logger, IRepository cxt, IFileManager fileManager)
         {
             _logger = logger;
             _repo = cxt;
+            _fileManager = fileManager;
         }
 
         public IActionResult Index()
@@ -30,6 +34,13 @@ namespace MyBlog.Controllers
         {
             var post = _repo.GetPost(id);
             return View(post);
+        }
+
+        [HttpGet("/Image/{image}")]
+        public IActionResult Image(string image)
+        {
+            var mime = image.FileName.Substring(image.FileName.LastIndexOf('.'));
+            return new FileStreamResult(_fileManager.ImageStream(image));
         }
         //public IActionResult Privacy()
         //{

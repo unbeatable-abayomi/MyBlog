@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyBlog.Data.FileManger;
 using MyBlog.Models;
 using MyBlog.Repository;
 using MyBlog.ViewModels;
@@ -16,10 +17,12 @@ namespace MyBlog.Controllers
     public class PanelController : Controller
     {
         private IRepository _repo;
+        private IFileManager _fileManager;
 
-        public PanelController(IRepository repo)
+        public PanelController(IRepository repo, IFileManager fileManager)
         {
             _repo = repo;
+            _fileManager = fileManager;
         }
         public IActionResult Index()
         {
@@ -65,7 +68,7 @@ namespace MyBlog.Controllers
                 Id = vm.Id,
                 Title = vm.Title,
                 Body = vm.Body,
-                Image = ""
+                Image = await _fileManager.SaveImage(vm.Image)
             };
             if (post.Id > 0)
             {
