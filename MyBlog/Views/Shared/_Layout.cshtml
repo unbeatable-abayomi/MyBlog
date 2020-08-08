@@ -21,40 +21,46 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <nav>
-                        <ul class="navbar-nav flex-grow-1">
+						<ul class="navbar-nav flex-grow-1">
 
 
+						
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-route-category="travel">Travel</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-route-category="Programming">Programming</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-route-category="Photography">Photography</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+							</li>
+							@*<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Panel" asp-action="Edit">Create</a>
+		</li>*@
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Panel" asp-action="Index">Admin Panel</a>
+							</li>
+							@if (User.Identity.IsAuthenticated)
+							{
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Log Out</a>
+								</li>
+							}
+							else
+							{
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login"> Sign In</a>
+								</li>
+							}
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-route-category="Programming">Programming</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Panel" asp-action="Edit">Create</a>
-        </li>*@
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Panel" asp-action="Index">Admin Panel</a>
-                            </li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Log Out</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login"> Sign In</a>
-                                </li>
-                            }
 
-
-                        </ul>
+						</ul>
                     </nav>
                 </div>
             </div>

@@ -1,11 +1,13 @@
 ﻿@model MyBlog.Models.Post
 
 @{
-    ViewData["Title"] = Model.Title;
-    ViewBag.Description = Model.Description;
-    //You have not done the keywords check it online
-    //ViewBag.Category = "Blog Programming Tavelling Photography Website";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = Model.Title;
+	ViewBag.Description = Model.Description;
+
+
+	ViewBag.Keywords = $"{Model.Tags?.Replace(","," ")}{Model.Category}";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
