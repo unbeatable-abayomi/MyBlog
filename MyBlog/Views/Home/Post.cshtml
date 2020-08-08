@@ -1,7 +1,10 @@
 ﻿@model MyBlog.Models.Post
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Model.Title;
+    ViewBag.Description = Model.Description;
+    //You have not done the keywords check it online
+    //ViewBag.Category = "Blog Programming Tavelling Photography Website";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

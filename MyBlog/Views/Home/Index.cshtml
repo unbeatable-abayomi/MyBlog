@@ -1,19 +1,21 @@
 ﻿@model IEnumerable<MyBlog.Models.Post>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Blog Website";
+    ViewBag.Description = "This Blog Has EveryThing ";
+    ViewBag.Category = "Blog Programming Tavelling Photography Website";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Home Page</h1>
 
 @*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
+        <a asp-action="Create">Create New</a>
+    </p>*@
 @*<img src="~/content/static/builee-com-yLdKV70P4kw-unsplash.jpg" width="470" />*@
 
 <div class="main-img">
-     <span class="title">Amazing Blog Site</span>
+    <span class="title">Amazing Blog Site</span>
 </div>
 <div class="containerMe">
     @*@foreach (var item in Model)
@@ -37,10 +39,10 @@
     {
         var imagePath = $"/Image/{item.Image}";
         <a class="post" asp-controller="Home" asp-action="Post" asp-route-Id="@item.Id"> @item.Title</a>
-     
+
 
         <img src="@imagePath" width="150" />
-        <span >@item.Title</span>
+        <span>@item.Title</span>
 
 
     }

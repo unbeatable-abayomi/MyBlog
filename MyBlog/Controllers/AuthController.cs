@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyBlog.Controllers
 {
-    public class AuthController : Controller
+	public class AuthController : Controller
     {
         private SignInManager<IdentityUser> _signInManager;
 

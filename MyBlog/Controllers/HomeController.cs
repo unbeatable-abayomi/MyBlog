@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyBlog.Data.FileManger;
-using MyBlog.Models;
 using MyBlog.Repository;
 
 namespace MyBlog.Controllers
 {
-    public class HomeController : Controller
+	public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository _repo;
@@ -24,9 +18,9 @@ namespace MyBlog.Controllers
             _fileManager = fileManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string category)
         {
-            var posts = _repo.GetAllPost(); 
+            var posts = string.IsNullOrEmpty(category)? _repo.GetAllPost(): _repo.GetAllPost(category); 
             return View(posts);
         }
 
