@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MyBlog.Data;
 using MyBlog.Repository;
 using MyBlog.Data.FileManger;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MyBlog
 {
@@ -52,7 +53,13 @@ namespace MyBlog
             services.AddTransient<IRepository, RepositoryClass>();
             services.AddTransient<IFileManager, FileManager>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews( options =>
+			{
+                options.CacheProfiles.Add("Monthly", new CacheProfile { Duration = 60 * 60 * 24 * 7 * 4 });
+			}
+                
+                
+                );
           
 
         }

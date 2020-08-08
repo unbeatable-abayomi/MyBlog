@@ -8,7 +8,14 @@
 	<meta name="keywords" content="@ViewBag.Keywords" />
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	@*<link rel="stylesheet" href="~/css/site.css" />*@
-	<link rel="stylesheet" href="~/css/mycss.css" />
+	<environment include="Production">
+		<link rel="stylesheet" href="~/css/mycss.min.css" />
+	</environment>
+	<environment include="Development">
+		<link rel="stylesheet" href="~/css/mycss.css" />
+	</environment>
+>
+
 </head>
 <body>
 	<header>

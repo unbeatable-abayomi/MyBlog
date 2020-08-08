@@ -5,9 +5,9 @@
 	ViewBag.Description = Model.Description;
 
 
-	ViewBag.Keywords = $"{Model.Tags?.Replace(","," ")}{Model.Category}";
+	ViewBag.Keywords = $"{Model.Tags?.Replace(",", " ")}{Model.Category}";
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -18,28 +18,58 @@
 
 @if (!String.IsNullOrEmpty(Model.Image))
 {
-    var imagePath = $"/Image/{Model.Image}";
+	var imagePath = $"/Image/{Model.Image}";
 
-    <img src="@imagePath" width="150" />
+	<img src="@imagePath" width="150" />
 }
 <h5>@Model.Body</h5>*@
 <div class="containerMe">
-    <div class="post no-shadow">
-        @if (!String.IsNullOrEmpty(Model.Image))
-        {
-            var imagePath = $"/Image/{Model.Image}";
+	<div class="post no-shadow">
+		@if (!String.IsNullOrEmpty(Model.Image))
+		{
+			var imagePath = $"/Image/{Model.Image}";
 
-            <img src="@imagePath" width="150" />
-            <span class="title">@Model.Title</span>
-        }
-    </div>
-    <div class="post-body">
-        @Html.Raw(Model.Body);
-        
-    </div>
+			<img src="@imagePath" width="150" />
+			<span class="title">@Model.Title</span>
+		}
+	</div>
+	<div class="post-body">
+		@Html.Raw(Model.Body);
+		
+	</div>
+
+	<div class="comment-section">
+		@{
+
+		await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 });
+		}
+
+
+		@foreach (var c in Model.MainComments )
+		{
+		<p>
+			@c.Message --- @c.Created
+		</p>
+			
+		
+		<div>
+			<h4>Sub Comments</h4>
+			@{
+		await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id });
+			}
+
+			@foreach (var sc in c.SubComments)
+			{
+				<p>
+					@sc.Message --- @sc.Created
+				</p>
+			}
+		</div>
+		}
+	</div>
 </div>
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

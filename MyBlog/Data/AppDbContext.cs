@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MyBlog.Comments;
 using MyBlog.Models;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,7 @@ namespace MyBlog.Data
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<MainComment> MainComments { get; set; }
+        public DbSet<SubComment> SubComments  { get; set; }
     }
 }

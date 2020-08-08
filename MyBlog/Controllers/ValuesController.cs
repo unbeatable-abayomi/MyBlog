@@ -3,8 +3,8 @@
 namespace MyBlog.Controllers
 {
 	[Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
-    {
-    }
+	[ApiController]
+	public class ValuesController : ControllerBase
+	{
+	}
 }
