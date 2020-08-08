@@ -21,14 +21,19 @@ namespace MyBlog.Repository
             _cxt.Posts.Add(post);
         }
 
-        public List<Post> GetAllPost()
+        public List<Post> GetAllPost() 
         {
             return _cxt.Posts.ToList();
         }
         public List<Post> GetAllPost(string category)
-        {
-            return _cxt.Posts.Where(post => post.Category.ToLower().Equals(category.ToLower())).ToList();
-        }
+		{
+			//    Func<Post, bool> InCategory = (post) => {return post.Category.ToLower().Equals(category.ToLower()); };
+
+			//    return _cxt.Posts.Where(post => InCategory(post)).ToList();
+
+			//    or
+			return _cxt.Posts.Where(post => post.Category.ToLower().Equals(category.ToLower())).ToList();
+	}
         public Post GetPost(int id)
         {
             return _cxt.Posts.FirstOrDefault(p => p.Id == id);

@@ -18,78 +18,35 @@ namespace MyBlog.Controllers
 			_fileManager = fileManager;
 		}
 
-		public IActionResult Index(string category)
-		{
-			var posts = string.IsNullOrEmpty(category)? _repo.GetAllPost(): _repo.GetAllPost(category); 
-			return View(posts);
-		}
+		//public IActionResult Index(string category)
+		//{
+		//	var posts = string.IsNullOrEmpty(category)? _repo.GetAllPost(): _repo.GetAllPost(category); 
+		//	return View(posts);
+		//}
 
-		public IActionResult Post(int id)
-		{
-			var post = _repo.GetPost(id);
-			return View(post);
-		}
+
+		public IActionResult Index(string category) => View(string.IsNullOrEmpty(category) ? _repo.GetAllPost() : _repo.GetAllPost(category));
+
+		//public IActionResult Post(int id)
+		//{
+		//	var post = _repo.GetPost(id);
+		//	return View(post);
+		//}
+
+		public IActionResult Post(int id) => View(_repo.GetPost(id));
+
+		//[HttpGet("/Image/{image}")]
+		//public IActionResult Image(string image)
+		//{
+		//	var mime = image.Substring(image.LastIndexOf('.') + 1);
+		//	return new FileStreamResult(_fileManager.ImageStream(image), $"Image/{mime}");
+		//}
+
 
 		[HttpGet("/Image/{image}")]
-		public IActionResult Image(string image)
-		{
-			var mime = image.Substring(image.LastIndexOf('.') + 1);
-			return new FileStreamResult(_fileManager.ImageStream(image), $"Image/{mime}");
-		}
-		//public IActionResult Privacy()
-		//{
-		//    return View();
-		//}
+		public IActionResult Image(string image) => new FileStreamResult(_fileManager.ImageStream(image), $"Image/{ image.Substring(image.LastIndexOf('.') + 1)}");
 
-		//[HttpGet]
-		//public IActionResult Edit(int? id)
-		//{
-		//    if(id == null)
-		//    {
-		//        return View(new Post());
-		//    }
-		//    else
-		//    {
-		//        var post = _repo.GetPost((int)id);
-		//        return View(post);
-		//    }
 
-		//}
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public async Task <IActionResult> Edit(Post post)
-		//{
-		//    if(post.Id > 0)
-		//    {
-		//        _repo.UpdatePost(post);
-		//    }
-		//    else
-		//    {
-		//        _repo.AddPost(post);
-		//    }
 
-		//    if(await _repo.SaveChangeAsync())
-		//    {
-		//        return RedirectToAction("Index");
-		//    }
-		//    else
-		//    {
-		//        return View(post);
-		//    }
-		//}
-
-		//[HttpGet]
-		//public async Task <IActionResult> Remove(int id)
-		//{
-		//    _repo.RemovePost(id);
-		//    await _repo.SaveChangeAsync();
-		//    return RedirectToAction("Index");
-
-		//}
-		//[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		//public IActionResult Error()
-		//{
-		//    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		//}
 	}
 }
